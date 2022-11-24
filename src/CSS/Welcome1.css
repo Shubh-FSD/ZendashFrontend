@@ -1,0 +1,23 @@
+
+*{margin: 0; padding:0; box-sizing: border-box;}
+
+
+.login-wrapper{
+  width: 100vw; height:100vh;
+    text-align: center;
+    margin-top:6rem;
+
+  }
+
+.Adjust{
+      width:60vw;
+    display:inline-block;
+    flex-wrap: wrap;
+   margin:2rem
+}
+
+  .wallpaper{
+    background-image: url(../assets/imgs/login\ image.jpg);
+    height: 100vh;
+  }
+
