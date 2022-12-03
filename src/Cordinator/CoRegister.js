@@ -5,8 +5,7 @@ import Form from "react-bootstrap/Form";
  import { Button, FormGroup, Input, Label } from "reactstrap";
   import env from "../enviroinment";
  import { useNavigate } from "react-router-dom";
-//  import Spinner from "react-bootstrap/Spinner";
-import "../CSS/Login.css";
+import "../CSS/CordinatorCSS.css";
 
 
 function CoRegister() {
@@ -43,10 +42,10 @@ function CoRegister() {
 
  
   return (
-    <>
          <div >
-                   <Form>
-        <FormGroup>
+        <Form>
+        <div className="row">
+        <div className="col"><FormGroup>
           <Label for="firstName">Name</Label>
           <Input
             onChange={(e)=>setFirstName(e.target.value)}
@@ -54,8 +53,8 @@ function CoRegister() {
            
             type="text"
           />
-        </FormGroup>
-        <FormGroup>
+        </FormGroup></div>
+        <div className="col"><FormGroup>
           <Label for="lastName">Last Name</Label>
           <Input
             onChange={(e)=>setLastName(e.target.value)}
@@ -63,8 +62,10 @@ function CoRegister() {
             type="text"
            
           />
-        </FormGroup>
-        <FormGroup>
+        </FormGroup></div>
+        </div>
+        <div className="row">
+        <div className="col"><FormGroup>
           <Label for="mobileNumber">Mobile Number</Label>
           <Input
             onChange={(e)=>setMobileNumber(e.target.value)}
@@ -72,7 +73,8 @@ function CoRegister() {
             type="mobileNumber"
             
           />
-        </FormGroup>
+        </FormGroup></div>
+        <div className="col">
         <FormGroup>
           <Label for="role">Role</Label>
           <Input
@@ -82,7 +84,11 @@ function CoRegister() {
             
           />
         </FormGroup>
-        <FormGroup>
+        </div>
+
+        </div>
+       
+        <div className="row"><FormGroup>
           <Label for="email">email</Label>
           <Input
             onChange={(e)=>setEmail(e.target.value)}
@@ -91,7 +97,9 @@ function CoRegister() {
        
           />
         </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="row">
+        <div className="col"><FormGroup>
           <Label for="password">password</Label>
           <Input
             id="password"
@@ -100,8 +108,8 @@ function CoRegister() {
             type="text"
            
           />
-        </FormGroup>
-        <FormGroup>
+        </FormGroup></div>
+        <div className="col"><FormGroup>
           <Label for="batch">Batch</Label>
           <Input
             id="batch"
@@ -110,11 +118,11 @@ function CoRegister() {
             type="text"
           
           />
-        </FormGroup>
+        </FormGroup></div>
+        </div>
         <Button onClick={()=>handleSubmit()}>Submit</Button>
-                   </Form>  
+ </Form>  
       </div>
-    </>
   );
 }
 

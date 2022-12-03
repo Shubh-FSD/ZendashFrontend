@@ -45,7 +45,7 @@ function Login() {
         if (res.data.statusCode === 200) {
           if (res.data.dataRole === "Cordinator"){ navigate('/CordinatorDash')}
           if (res.data.dataRole === "Student"){ navigate('/StudentDash')}
-          if (res.data.dataRole === "Teacher"){ navigate('/TeaherDash')}
+          if (res.data.dataRole === "Teacher"){ navigate('/teacherDash')}
           
         }
      }

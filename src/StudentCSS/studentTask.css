@@ -1,0 +1,31 @@
+*{margin:0; padding:0;box-sizing: border-box;}
+
+.dashContent{
+    height:100vh;
+    width:70vw;
+    display: inline-block;  
+}
+
+.dashContent h1{
+    text-align:center
+}
+
+/* TaskTable */
+
+.taskTable h1{
+    margin-top: 3rem;
+    color:blue
+}
+
+table{
+    text-align:center
+}
+
+
+form{
+    width:70vw;
+    display:inline-block;
+    flex-wrap: wrap;
+   margin:2rem
+  }
+

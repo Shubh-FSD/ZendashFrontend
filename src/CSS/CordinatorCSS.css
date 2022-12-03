@@ -1,0 +1,19 @@
+
+*{margin: 0; padding:0; box-sizing: border-box;}
+
+
+.login-wrapper{
+  height:100vh;
+  width:100vw;
+    text-align: center;
+    margin-top:2rem;
+
+  }
+
+  form{
+    width:70vw;
+    display:inline-block;
+    flex-wrap: wrap;
+   margin:2rem
+  }
+ 

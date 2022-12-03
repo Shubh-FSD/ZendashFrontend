@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React, { useState } from "react";
 // import Button from "react-bootstrap/Button";
 // import Form from "react-bootstrap/Form";
 // import axios from "axios";
@@ -6,35 +6,58 @@ import React, {  } from "react";
 // import { useNavigate } from "react-router-dom";
 // import Spinner from "react-bootstrap/Spinner";
 import "../StudentCSS/student.css";
-import logo from "../assets/imgs/zenclass.jpg";
-import { RiCloseCircleFill } from "react-icons/ri";
-import { AiFillInteraction } from "react-icons/ai";
-import { BiAddToQueue } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
-function CoSidebar() {
+import {
+  FaTh,
+  FaBars,
+} from "react-icons/fa";
+
+const CoSidebar = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
+  const menuItem = [
+    {
+      path: "Add",
+      name: "Add",
+      icon: <FaTh />,
+    },
+    {
+      path: "/productList",
+      name: "Log-Out",
+      icon: <FaBars />,
+    },
+  ];
   return (
-        <aside>
-          <div className="top ">
-            {/* <div className="logo d-flex align-items-center"> */}
-            <div className="logo ">
-              <img src={logo} alt="" />
-              <h1 className="fs-3">Student</h1>
-            </div>
-            <div className="close" >
-              <RiCloseCircleFill />
-            </div>
+    <div className="container-fluid">
+    <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
+      <div className="top_section">
+        <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
+          ZEN
+        </h1>
+        <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
+          <FaBars onClick={toggle} />
+        </div>
+      </div>
+      {menuItem.map((item, index) => (
+        <Link
+          to={item.path}
+          key={index}
+          className="link"
+          activeclassName="active"
+        >
+          <div className="icon">{item.icon}</div>
+          <div
+            style={{ display: isOpen ? "block" : "none" }}
+            className="link_text"
+          >
+            {item.name}
           </div>
-          <div className="sidebar">
-          <a className=" Active" href="/">
-              <span ><BiAddToQueue/></span>
-              <div className="menu">Add</div>
-            </a>
-            <a href="/">
-              <span><AiFillInteraction/></span>
-            <div className="menu">Logout</div>
-            </a>
-          </div>
-        </aside>
+        </Link>
+      ))}
+    </div>
+    <main>{children}</main>
+  </div>
   );
 }
 
