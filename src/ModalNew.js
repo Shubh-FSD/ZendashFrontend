@@ -36,13 +36,13 @@ function ModalNew() {
           <h4>Teacher</h4>
           <p>Teacher has rights to assign task, webcode task, interview task , to take query,put remarks over query, Provide marks to differant tasks </p>
           <p>Email: teacher@gmail.com</p>
-          <p>Password:Teacher@123</p>
+          <p>Password:teacher@123</p>
 </div>
            <div>
           <h4>Student</h4>
           <p>Student has rights to see updates regarding next actions such as class schedules ,to submit task & to raise query </p>
           <p>Email: student@gmail.com</p>
-          <p>Password: Student@123</p>
+          <p>Password: student@123</p>
           </div>
           </div>
         </Modal.Body>
