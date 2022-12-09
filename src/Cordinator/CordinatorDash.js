@@ -6,7 +6,7 @@ import React from "react";
 import "../StudentCSS/TeacherDash.css";
 import CoSidebar from "./CoSidebar";
 import CoRegister from "./CoRegister";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 function CordinatorDash() {
   return (
@@ -30,9 +30,7 @@ function CordinatorDash() {
          <div className="dashContent ">
                  <div>
                  <h1>Cordinator Dashboard</h1>
-                 <Routes>
-               <Route path="/" element={<CoRegister />} />
-            </Routes>
+                 <Outlet />
                  </div>
                  </div>
          </div>

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import {
   FaTh,
   FaBars,
+  FaBookOpen,FaBookReader,FaUserTie
 } from "react-icons/fa";
 
 const CoSidebar = ({ children }) => {
@@ -18,12 +19,22 @@ const CoSidebar = ({ children }) => {
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
     {
-      path: "Add",
-      name: "Add",
-      icon: <FaTh />,
+      path: "AddCordinator",
+      name: "Cordinator",
+      icon: <FaUserTie />,
     },
     {
-      path: "/productList",
+      path: "AddTeacher",
+      name: "Add Teacher",
+      icon: <FaBookOpen />,
+    },
+    {
+      path: "AddStudent",
+      name: "Add Student",
+      icon: <FaBookReader />,
+    },
+    {
+      path: "/",
       name: "Log-Out",
       icon: <FaBars />,
     },

@@ -11,7 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-function CoRegister() {
+function TeacherAdd() {
   const navigate = useNavigate();
   let [firstName,setFirstName]=useState("")
   let [lastName,setLastName]=useState("")
@@ -62,7 +62,7 @@ function CoRegister() {
             password,
             batch
         })
-        if(res.data.statusCode===200 ||304)
+        if(res.data.statusCode===200 ||204)
         {
            sessionStorage.setItem('token',res.data.token)
            notify()
@@ -84,11 +84,11 @@ function CoRegister() {
 
   let handleTaskUpdate = async (id) => {
     console.log(id);
-    navigate("/UpCordi/" + id);
+    navigate("/UpTeach/" + id);
   };
 
   let loadCoData = async () => {
-    let res = await axios.get(`${env.apiurl}/users/getCoData`);
+    let res = await axios.get(`${env.apiurl}/users/getTeachData`);
     if (res.data.statusCode === 200 || 304) {
       setData(res.data.data);
     } else {
@@ -103,7 +103,7 @@ function CoRegister() {
   return (
          <div >
         <Form>
-        <h3>Add Cordinates To Organization Workspace</h3>
+        <h3>Add Teacher To Organization Workspace</h3>
         <div className="row">
         <div className="col"><FormGroup>
           <Label for="firstName">First Name</Label>
@@ -139,7 +139,7 @@ function CoRegister() {
         </FormGroup></div>
         <div className="col">
         <FormGroup>
-            <label>Role</label>
+        <label>Role</label>
             <div class="form-floating">
               <select
                 class="form-select"
@@ -149,12 +149,11 @@ function CoRegister() {
                 value={role}
               >
                 <option selected>Open this select menu</option>
-                <option value="Cordinator">Cordinator</option>
+                <option value="Teacher">Teacher</option>
 
               </select>
             </div>
         </FormGroup>
-        
         </div>
 
         </div>
@@ -198,7 +197,7 @@ function CoRegister() {
           style={{ background: "green", width: "6rem" }} onClick={()=>handleSubmit()}>Submit</Button>
  </Form>  
  <div className="taskTable">
-        <h3>Cordinator Updates</h3>
+        <h3>Teacher Updates</h3>
         <Table  striped responsive bordered hover ref={tableRef}>
           <thead>
             <tr>
@@ -259,4 +258,4 @@ function CoRegister() {
   );
 }
 
-export default CoRegister;
+export default TeacherAdd;

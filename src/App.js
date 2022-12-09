@@ -25,6 +25,12 @@ import UpWebcodeMark from "./Teacher/UpWebcodeMark";
 import StudWebcode from "./Student/StudWebcode";
 import UpQuery from "./Teacher/UpQuery";
 import StaffClass from "./Teacher/StaffClass";
+import CoRegister from "./Cordinator/CoRegister";
+import StuAdd from "./Cordinator/StuAdd";
+import TeacherAdd from "./Cordinator/TeacherAdd";
+import Upstu from "./Cordinator/UpStu";
+import UpTeach from "./Cordinator/UpTeach";
+import UpCordi from "./Cordinator/UpCordi";
 
 function App() {
   return (
@@ -36,7 +42,13 @@ function App() {
             <Route path="/Register" element={<Register />} />
             <Route path="/RegisterReq" element={<RegisterReq />} />
             
-            <Route path="/CordinatorDash" element={<CordinatorDash />} />
+            <Route path="/CordinatorDash" element={<CordinatorDash />} >
+            <Route index element={<CoRegister />} />
+                <Route path="AddCordinator" element={<CoRegister />} />
+                <Route path="AddStudent" element={<StuAdd />} />
+                <Route path="AddTeacher" element={<TeacherAdd />} />
+                </Route>
+
             <Route path="/StudentDash" element={<StudentDash />} >
                 <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
@@ -60,6 +72,10 @@ function App() {
             <Route  path="/upWebMark/:id" element={<UpWebcodeMark />} /> 
             <Route  path="/upInter/:id" element={<UpInterviewMark />} />  
             <Route  path="/upQuery/:id" element={<UpQuery />} />  
+
+            <Route  path="/Upstu/:id" element={<Upstu />} /> 
+            <Route  path="/UpTeach/:id" element={<UpTeach />} />  
+            <Route  path="/UpCordi/:id" element={<UpCordi />} />  
             <Route path="*" element={<Navigate to={"/"} />} />
           </Routes>
           
