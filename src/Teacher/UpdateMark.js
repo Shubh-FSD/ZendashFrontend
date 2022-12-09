@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
 import env from "../enviroinment";
+import "../StudentCSS/UpWebcodeStaff.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function UpdateMark() {
@@ -28,6 +31,24 @@ console.log(res)
   };
 
   
+  const handleBack = () => {
+    navigate("/teacherDash/task")
+    
+  };
+
+  const notify =  () => {
+    toast.success(' Updatation done!!!!!', {
+     position: "top-center",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+     theme: "light",
+     });
+   ;
+ };
   const handleSubmit = async ()=>{
     let res = await axios.put(`${env.apiurl}/taskSolution/updateMarksNew/${params.id}`,{
         
@@ -41,13 +62,14 @@ console.log(res)
     // {fun.loadData}
     if(res.data.statusCode===200)
     {    
-        navigate("task");
+      notify();
     }
 
 };
 
+
   return (
-    <Container className="wallpaper1">
+    <section className="container-fluid back">
       <h1>Update Mark</h1>
       <Form>
         <FormGroup>
@@ -95,8 +117,17 @@ console.log(res)
             type="text"
           />
         </FormGroup>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button className="mx-2 mt-2" style={{"background" : "green","width":"6rem"}} onClick={handleSubmit}>Submit</Button>
+        <Button className="mx-2 mt-2" style={{"background" : "blue","width":"6rem"}}
+          onClick={() => {
+            handleBack();
+          }}
+         
+        >
+          Back
+        </Button>
       </Form>
-    </Container>
+      <ToastContainer />
+    </section>
   );
 }

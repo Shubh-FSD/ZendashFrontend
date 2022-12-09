@@ -1,4 +1,5 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import StudentDash from "./Student/StudentDash";
 import "./App.css";
 import CordinatorDash from "./Cordinator/CordinatorDash";
@@ -14,7 +15,6 @@ import StaffWebcode from "./Teacher/StaffWebcode";
 import StaffInterview from "./Teacher/StaffInterview";
 import StaffTask from "./Teacher/StaffTask";
 import Task from "./Student/Task";
-import Webcode from "./Student/Webcode";
 import Interview from "./Student/Interview";
 import Query from "./Student/Query";
 import Class from "./Student/Class";
@@ -22,12 +22,13 @@ import Dashboard from "./Student/Dashboard";
 import UpdateMark from "./Teacher/UpdateMark";
 import UpInterviewMark from "./Teacher/UpInterviewMark";
 import UpWebcodeMark from "./Teacher/UpWebcodeMark";
+import StudWebcode from "./Student/StudWebcode";
+import UpQuery from "./Teacher/UpQuery";
+import StaffClass from "./Teacher/StaffClass";
 
 function App() {
   return (
-    <div>
-      <div id="wrapper">
-        <div id="content-wrapper" className="d-flex flex-column">
+     
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/Forgot" element={<Forgot />} />
@@ -37,30 +38,31 @@ function App() {
             
             <Route path="/CordinatorDash" element={<CordinatorDash />} />
             <Route path="/StudentDash" element={<StudentDash />} >
-                <Route index element={<Task />} />
+                <Route index element={<Dashboard />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="class" element={<Class />} />
                 <Route path="query" element={<Query />} />
                 <Route path="studentTask" element={<Task />} />
-                <Route path="webcode" element={<Webcode />} />
+                <Route path="webcode" element={<StudWebcode />} />
                 <Route path="interview" element={<Interview />} />
             </Route>
             <Route path="/teacherDash" element={<TeacherDash />} >
-               <Route index element={<StaffTask />} />
+               <Route index element={<StaffQuery />} />
+               <Route path="class" element={<StaffClass />} />
                <Route path="task" element={<StaffTask />} />
                <Route path="query" element={<StaffQuery />} />  
-               <Route path="StaffWebcode" element={<StaffWebcode />} />
-               <Route path="interview" element={<StaffInterview />} />
-               <Route  path="updateMark/:id"  element={<UpdateMark />} />  
-               <Route  path="upInter/:id" element={<UpInterviewMark />} />  
-               <Route  path="upWebMark/:id" element={<UpWebcodeMark />} /> 
+               <Route exact path="StaffWebcode" element={<StaffWebcode />} />
+               <Route path="interview" element={<StaffInterview />} /> 
+               {/* <Route  path="upInter/:id" element={<UpInterviewMark />} />   */}
+              
             </Route>
-
+            <Route  path="/updateMark/:id"  element={<UpdateMark />} />  
+            <Route  path="/upWebMark/:id" element={<UpWebcodeMark />} /> 
+            <Route  path="/upInter/:id" element={<UpInterviewMark />} />  
+            <Route  path="/upQuery/:id" element={<UpQuery />} />  
             <Route path="*" element={<Navigate to={"/"} />} />
           </Routes>
-        </div>
-      </div>
-    </div>
+          
   );
 }
 

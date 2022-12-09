@@ -55,3 +55,13 @@ color:aliceblue
     font-weight: 450;
     color:rgb(6, 6, 6)
   }
+
+.openModalBtn {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+  }

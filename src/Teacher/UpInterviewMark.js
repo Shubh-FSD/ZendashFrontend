@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import axios from "axios";
 import env from "../enviroinment";
+import "../StudentCSS/UpWebcodeStaff.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UpInterviewMark() {
   const params = useParams();
@@ -12,6 +15,7 @@ export default function UpInterviewMark() {
   const [date, setDate] = useState("");
   const [batch, setBatch] = useState("");
   const [interviewTopic, setInterviewTopic] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const getData = async () => {
     let res = await axios.get(
@@ -27,25 +31,46 @@ export default function UpInterviewMark() {
   };
 
   const handleSubmit = async () => {
-    let res = await axios.put(
+    let  res =await axios.put(
       `${env.apiurl}/interview/UpInterviewMark/${params.id}`,
       {
         email,
         marks,batch,date,interviewTopic
       }
     );
-    // {fun.loadData}
-    if (res.data.statusCode === 200) {
-       navigate("task");
+
+    if (res.data.statusCode === 200||304){
+      notify();
     }
+   
   };
+
+  const notify =  () => {
+    toast.success(' Updatation done!!!!!', {
+     position: "top-center",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+     theme: "light",
+     });
+   ;
+ };
+
+ const handleBack = () => {
+  navigate("/teacherDash/interview")
+  
+};
+
 
   useEffect(() => {
     getData();
   }, []);
   return (
-    <Container className="wallpaper1">
-      <h1>Update Mark</h1>
+    <section className="container-fluid back">
+      <h1>Update Interview Mark</h1>
       <Form>
       <FormGroup>
           <Label for="batch">Batch</Label>
@@ -54,6 +79,7 @@ export default function UpInterviewMark() {
             value={batch}
             placeholder="Enter batch"
             type="text"
+            disabled={isDisabled}
           />
         </FormGroup>
         <FormGroup>
@@ -63,6 +89,7 @@ export default function UpInterviewMark() {
             value={email}
             placeholder="Enter Email"
             type="email"
+            disabled={isDisabled}
           />
         </FormGroup>
         <FormGroup>
@@ -92,8 +119,24 @@ export default function UpInterviewMark() {
             type="text"
           />
         </FormGroup>
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button className="mx-2 mt-2" style={{"background" : "green","width":"6rem"}}
+          onClick={() => {
+            handleSubmit();
+            
+          }}
+        >
+          Submit
+        </Button>
+        <Button className="mx-2 mt-2" style={{"background" : "blue","width":"6rem"}}
+          onClick={() => {
+            handleBack();
+          }}
+         
+        >
+          Back
+        </Button>
       </Form>
-    </Container>
+      <ToastContainer />
+    </section>
   );
 }

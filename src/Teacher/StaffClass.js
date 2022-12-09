@@ -5,27 +5,24 @@ import { Button, FormGroup, Input, Label } from "reactstrap";
 import env from "../enviroinment";
 import "../StudentCSS/TeacherDash.css";
 import Table from "react-bootstrap/Table";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function StaffInterview() {
+function StaffClass() {
   let [date, setDate] = useState("");
-  const [interviewTopic, setInterviewTopic] = useState("");
+  const [topic, setTopic] = useState("");
   let [batch, setBatch] = useState("");
   let [data, setData] = useState([]);
-  let [values, setValues] = useState([]);
-  const [email, setEmail] = useState();
+  const [meetLink, setMeetLink] = useState();
   let tableRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async () => {
-
-    if (batch && interviewTopic && email && date) {
-      let res = await axios.post(`${env.apiurl}/interview/sendInterviewData`, {
+    
+    if (batch && meetLink && topic && date) {
+      let res = await axios.post(`${env.apiurl}/class/sendclassData`, {
         batch,
-        email,
-        interviewTopic,
+        meetLink,
+        topic,
         date,
       });
       if (res.data.statusCode === 200 || 204) {
@@ -35,28 +32,16 @@ function StaffInterview() {
     else {
       notifyWarn()
     }
+
+    setTopic('');
     setBatch('');
-    setInterviewTopic('');
+    setMeetLink('');
   };
 
   let loadData = async () => {
-    let res = await axios.get(`${env.apiurl}/interview/getInterviewData`);
+    let res = await axios.get(`${env.apiurl}/class/getClassData`);
     if (res.data.statusCode === 200 || 304) {
       setData(res.data.data);
-    } else {
-      alert(res.data.message);
-    }
-  };
-
-  let handleTaskUpdate = async (id) => {
-    console.log(id);
-    navigate("/upInter/" + id);
-  };
-
-  let loadEmailData = async () => {
-    let res = await axios.get(`${env.apiurl}/users/getEmailData`);
-    if (res.data.statusCode === 200 || 304) {
-      setValues(res.data.dataEmail);
     } else {
       alert(res.data.message);
     }
@@ -76,52 +61,41 @@ function StaffInterview() {
    ;
  };
 
- const notifyWarn =  () => {
- toast.error('Fill All Mandatory Inputs', {
-  position: "top-right",
-  autoClose: 5000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-  });
-}
+  const notifyWarn =  () => {
+    toast.error('Fill All Mandatory Inputs', {
+     position: "top-right",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+     theme: "light",
+     });
+   }
+ 
 
   useEffect(() => {
-    loadData();
-    loadEmailData();
-    
-  }, [values]);
+    loadData();  
+  }, [data]);
 
   return (
     <>
       <div>
-        <h5>Interview Section</h5>
+        <h5>Class Section</h5>
         <Form>
           <div className="col">
             <div className="row">
-              <div className="col">
+            <div className="col">
                 <FormGroup>
-                  <label>Categories</label>
-                  <div class="form-floating">
-                    <select
-                      class="form-select"
-                      id="floatingSelect"
-                      aria-label="Floating label select example"
-                      onChange={(e) => setEmail(e.target.value)}
-                    >
-                      <option value="none" hidden>
-                        Select
-                      </option>
-                      {values.map((opts, i) => {
-                        return <option key={i}>{opts.email}</option>;
-                      })}
-                    </select>
-                  </div>
+                  <Label for="topic">Topic</Label>
+                  <Input
+                    onChange={(e) => setTopic(e.target.value)}
+                    placeholder="Enter Topic"
+                    type="topic"
+                    value={topic}
+                  />
                 </FormGroup>
-            
               </div>
               <div className="col">
                 <FormGroup>
@@ -138,12 +112,12 @@ function StaffInterview() {
             <div className="row">
               <div className="col">
                 <FormGroup>
-                  <Label for="interviewTopic">Interview Topic</Label>
+                  <Label for="meetLink">Meet Link</Label>
                   <Input
-                    onChange={(e) => setInterviewTopic(e.target.value)}
-                    placeholder="Enter Interview Topic"
-                    type="interviewTopic"
-                    value={interviewTopic}
+                    onChange={(e) => setMeetLink(e.target.value)}
+                    placeholder="Enter Meet Link"
+                    type="meetLink"
+                    value={meetLink}
                   />
                 </FormGroup>
               </div>
@@ -166,17 +140,15 @@ function StaffInterview() {
         </Form>
       </div>
       <div className="taskTable">
-        <h5>Student Interview Updates</h5>
+        <h5>Student Class Scheduled List</h5>
         <Table striped responsive="md" bordered hover ref={tableRef}>
           <thead>
             <tr>
               <th>Sl No</th>
-              <th>Email</th>
+              <th>Topic</th>
               <th>Batch</th>
               <th>Date </th>
-              <th>Interview Topic</th>
-              <th>Marks</th>
-              <th>Update</th>
+              <th>Meet Link</th>
             </tr>
           </thead>
           <tbody>
@@ -184,19 +156,10 @@ function StaffInterview() {
               return (
                 <tr key={i}>
                   <td>{i + 1}</td>
-                  <td>{e.email}</td>
+                  <td>{e.topic}</td>
                   <td>{e.batch}</td>
                   <td>{e.date}</td>
-                  <td>{e.interviewTopic}</td>
-                  <td>{e.marks}</td>
-                  <td>
-                    <Button
-                      color="primary"
-                      onClick={() => handleTaskUpdate(e._id)}
-                    >
-                      Update
-                    </Button>
-                  </td>
+                  <td><a href = {e.meetLink}>{e.meetLink}</a></td>
                 </tr>
               );
             })}
@@ -208,4 +171,4 @@ function StaffInterview() {
   );
 }
 
-export default StaffInterview;
+export default StaffClass;

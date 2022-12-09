@@ -8,6 +8,10 @@ import {
   FaCommentAlt,
   FaShoppingBag,
   FaThList,
+  FaBuffer,
+  FaElementor,
+  FaSortAmountUp,
+  FaTh
 } from "react-icons/fa";
 
 const Sidebar = ({ children }) => {
@@ -17,12 +21,17 @@ const Sidebar = ({ children }) => {
     {
       path: "dashboard",
       name: "Dashboard",
-      icon: <FaBars />,
+      icon: <FaTh />,
+    },
+    {
+      path: "class",
+      name: "Class",
+      icon: <FaUserAlt />,
     },
     {
       path: "query",
       name: "Query",
-      icon: <FaUserAlt />,
+      icon: <FaBuffer />,
     },
     {
       path: "studentTask",
@@ -32,26 +41,22 @@ const Sidebar = ({ children }) => {
     {
       path: "interview",
       name: "Interview",
-      icon: <FaCommentAlt />,
+      icon: <FaSortAmountUp />,
     },
+    
     {
-      path: "capstone",
-      name: "Capstone",
-      icon: <FaCommentAlt />,
-    },
-    {
-      path: "StaffWebcode",
+      path: "webcode",
       name: "Webcode",
-      icon: <FaShoppingBag />,
+      icon: <FaElementor />,
     },
     {
-      path: "/productList",
+      path: "/",
       name: "Log-Out",
       icon: <FaThList />,
     },
   ];
   return (
-    <div className="container-fluid">
+    <div className="">
     <div style={{ width: isOpen ? "13rem" : "3rem" }} className="sidebar">
       <div className="top_section">
         <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">

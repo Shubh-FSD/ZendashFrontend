@@ -89,7 +89,7 @@ function CoRegister() {
         </div>
        
         <div className="row"><FormGroup>
-          <Label for="email">email</Label>
+          <Label for="email">Email</Label>
           <Input
             onChange={(e)=>setEmail(e.target.value)}
             placeholder="Enter email"
@@ -100,7 +100,7 @@ function CoRegister() {
         </div>
         <div className="row">
         <div className="col"><FormGroup>
-          <Label for="password">password</Label>
+          <Label for="password">Password</Label>
           <Input
             id="password"
             onChange={(e)=>setPassword(e.target.value)}

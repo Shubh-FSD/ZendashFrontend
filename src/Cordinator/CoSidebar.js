@@ -29,7 +29,7 @@ const CoSidebar = ({ children }) => {
     },
   ];
   return (
-    <div className="container-fluid">
+    <div className="">
     <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
       <div className="top_section">
         <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">

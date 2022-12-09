@@ -6,6 +6,8 @@ import env from "../enviroinment";
 import { useNavigate } from "react-router-dom";
 import "../StudentCSS/TeacherDash.css";
 import Table from "react-bootstrap/Table";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function StaffTask() {
   const navigate = useNavigate();
@@ -15,20 +17,53 @@ function StaffTask() {
   let tableRef = useRef(null);
 
   const handleSubmit = async () => {
-    if (batch || task) {
+    if (batch && task) {
       let res = await axios.post(`${env.apiurl}/task/taskSend`, {
         batch,
         task
       });
       if (res.data.statusCode === 200 || 204) {
-        alert("Task added");
+        notify()
       }
     }
+    else {
+      notifyWarn()
+    }
+
+    setBatch('');
+    setTask('');
   };
+
+  const notify =  () => {
+    toast.success(' Updatation done!!!!!', {
+     position: "top-center",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+     theme: "light",
+     });
+   ;
+ };
+
+ const notifyWarn =  () => {
+ toast.error('Fill All Mandatory Inputs', {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  });
+}
 
   let handleTaskUpdate = async (id) => {
     console.log(id)
-    navigate("updateMark/" + id);
+    navigate("/updateMark/" + id);
   };
 
   let loadData = async () => {
@@ -46,7 +81,7 @@ function StaffTask() {
   useEffect(() => {
     loadData();
    
-  }, []);
+  }, [data]);
 
   return (
    
@@ -60,6 +95,7 @@ function StaffTask() {
               onChange={(e) => setBatch(e.target.value)}
               placeholder="Enter Batch"
               type="text"
+              value={batch}
             />
           </FormGroup>
           <FormGroup>
@@ -68,6 +104,7 @@ function StaffTask() {
               onChange={(e) => setTask(e.target.value)}
               placeholder="Enter task"
               type="text"
+              value={task}
             />
           </FormGroup>
           <Button onClick={() => handleSubmit()}>Submit</Button>
@@ -75,7 +112,7 @@ function StaffTask() {
         </div>
         <div  className="taskTable">
         <h5>Student Task Updates</h5>
-        <Table striped bordered hover ref={tableRef}>
+        <Table striped responsive="md" bordered hover ref={tableRef}>
           <thead>
             <tr>
               <th>Sl No</th>
@@ -112,7 +149,9 @@ function StaffTask() {
             
           </tbody>
         </Table>
+        <h5>Student Need to respond on task then data will fetch in table</h5>
         </div>
+        <ToastContainer />
       </div>
   
   );

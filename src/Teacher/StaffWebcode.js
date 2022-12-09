@@ -6,6 +6,8 @@ import env from "../enviroinment";
 import "../StudentCSS/TeacherDash.css";
 import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function StaffWebcode() {
   const [webcodeTask, setWebcodeTask] = useState("");
@@ -16,18 +18,51 @@ function StaffWebcode() {
    let tableRef = useRef(null);
    const navigate = useNavigate();
 
+   const notify =  () => {
+    toast.success(' Updatation done!!!!!', {
+     position: "top-center",
+     autoClose: 5000,
+     hideProgressBar: false,
+     closeOnClick: true,
+     pauseOnHover: true,
+     draggable: true,
+     progress: undefined,
+     theme: "light",
+     });
+   ;
+ };
+
+ const notifyWarn =  () => {
+ toast.error('Fill All Mandatory Inputs', {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  });
+}
+
   const handleSubmit = async () => {
-    console.log(email,"EMAILLLLL")
-    if (batch || webcodeTask || email ) {
+    
+    if (batch && webcodeTask && email ) {
       let res = await axios.post(`${env.apiurl}/webcode/sendWebcodeData`, {
         batch,
         email,
         webcodeTask,
       });
       if (res.data.statusCode === 200 || 204) {
-        alert("Task added");
+        notify()
       }
     }
+    else {
+      notifyWarn()
+    }
+
+    setBatch('');
+    setWebcodeTask('');
   };
 
   let loadData = async () => {
@@ -41,7 +76,7 @@ function StaffWebcode() {
 
   let handleTaskUpdate = async (id) => {
     console.log(id)
-    navigate("upWebMark/" + id);
+    navigate("/upWebMark/" + id);
   };
 
   let loadEmailData = async () => {
@@ -56,8 +91,9 @@ function StaffWebcode() {
   useEffect(() => {
     loadData();
     loadEmailData();
+    
    
-  }, []);
+  }, [values]);
 
   return (
     <>
@@ -69,14 +105,19 @@ function StaffWebcode() {
               <div className="col">
                  <FormGroup className="col"> 
                  <Label for="email" className="row">Select Email</Label>
-                  <select   onChange={(e) => setEmail(e.target.value)}  className="row" >
-                  <option value="none" hidden >Select</option> 
-                  {values.map((opts, i) => { 
+                  <select
+                class="form-select"
+                id="floatingSelect"
+                aria-label="Floating label select example"
+                onChange={(e) => setEmail(e.target.value)}
+              >
+                <option selected>Open this select menu</option>
+                {values.map((opts, i) => { 
                     return (
                     
                     <option key={i} >{opts.email}</option> ) }
                   )}
-                  </select>
+              </select>
                  </FormGroup> 
               </div>
               <div className="col">
@@ -86,6 +127,7 @@ function StaffWebcode() {
                     onChange={(e) => setBatch(e.target.value)}
                     placeholder="Enter Batch"
                     type="text"
+                    value={batch}
                   />
                 </FormGroup>
               </div>
@@ -98,6 +140,7 @@ function StaffWebcode() {
                     onChange={(e) => setWebcodeTask(e.target.value)}
                     placeholder="Enter webcodeTask Topic"
                     type="webcodeTask"
+                    value={webcodeTask}
                   />
                 </FormGroup>
               </div>
@@ -110,7 +153,7 @@ function StaffWebcode() {
       </div>
       <div  className="taskTable">
         <h5>Student Webcode Task Updates</h5>
-        <Table striped bordered hover ref={tableRef}>
+        <Table striped responsive="md" bordered hover ref={tableRef}>
           <thead>
             <tr>
               <th>Sl No</th>
@@ -148,6 +191,7 @@ function StaffWebcode() {
           </tbody>
         </Table>
         </div>
+        <ToastContainer />
     </>
   );
 }

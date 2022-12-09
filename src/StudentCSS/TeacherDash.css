@@ -1,8 +1,15 @@
 *{margin:0; padding:0;box-sizing: border-box;}
 
+.bag{
+  background: rgb(112, 156, 156);
+}
+
+.bag1{
+  background: rgb(14, 216, 41);
+}
 .dashContent{
     height:100vh;
-    width:70vw;
+    /* width:70vw; */
     display: inline-block;  
 }
 
@@ -12,13 +19,16 @@
 
 /* TaskTable */
 
+
 .taskTable h1{
     margin-top: 3rem;
     color:blue
 }
 
 table{
-    text-align:center
+    text-align:center;
+   
+
 } 
 
 h5{
@@ -38,16 +48,15 @@ form{
   }
 
   
-    .container-fluid{
-         /* background-image: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);  */
-      
+ 
+
+  .take{
+    margin:0!important;
+    padding: 0 !important;
   }
 
-  /* .wallpaper3{
-    background-image: url(../assets/imgs/240_F_484111532_W0WOkKeXQzF75XusA7R8e3llIDXqyCFm.jpg);
-    height: 100vh;
-  } */
+.bags{ background: rgb(190, 211, 211);}
 
-  Select{
-    width:8rem
-  }
+.in{text-align: center;
+;}
+

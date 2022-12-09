@@ -10,6 +10,10 @@ import {
   FaCommentAlt,
   FaShoppingBag,
   FaThList,
+  FaBuffer,
+  FaElementor,
+  FaSortAmountUp,
+  
 } from "react-icons/fa";
 
 
@@ -17,33 +21,35 @@ const StaffSidebar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const menuItem = [
+    
     {
-      path: "/",
-      name: "Dashboard",
-      icon: <FaTh />,
+      path: "class",
+      name: "Class",
+      icon: <FaUserAlt />,
+    },
+    {
+      path: "interview",
+      name: "Interview",
+      icon: <FaSortAmountUp />,
     },
     {
       path: "query",
       name: "Query",
-      icon: <FaUserAlt />,
+      icon: < FaBuffer/>,
     },
     {
       path: "task",
       name: "Task",
       icon: <FaRegChartBar />,
     },
-    {
-      path: "interview",
-      name: "Interview",
-      icon: <FaCommentAlt />,
-    },
+ 
     {
       path: "StaffWebcode",
       name: "Webcode",
-      icon: <FaShoppingBag />,
+      icon: <FaElementor />,
     },
     {
-      path: "/productList",
+      path: "/",
       name: "Log-Out",
       icon: <FaThList />,
     },
@@ -51,7 +57,8 @@ const StaffSidebar = ({ children }) => {
   return (
    
 
-    <div className="container-fluid">
+    // <div className="container-fluid">
+    <div className="">
       <div style={{ width: isOpen ? "200px" : "50px" }} className="sidebar">
         <div className="top_section">
           <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
@@ -78,7 +85,7 @@ const StaffSidebar = ({ children }) => {
           </Link>
         ))}
       </div>
-      <main>{children}</main>
+      
     </div>
   );
 };
