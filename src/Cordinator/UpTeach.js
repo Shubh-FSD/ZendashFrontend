@@ -15,7 +15,7 @@ export default function UpTeach() {
   let [mobileNumber,setMobileNumber]=useState("")
   let [role,setRole]=useState("")
   let [email,setEmail]=useState("")
-  let [batch,setBatch]=useState("")
+ 
 
   const getData = async () => {
     let res = await axios.get(`${env.apiurl}/users/getUpTeachData/${params.id}`);
@@ -24,7 +24,7 @@ export default function UpTeach() {
     setMobileNumber(res.data.mobileNumber);
     setRole(res.data.role);
     setEmail(res.data.email);
-    setBatch(res.data.batch);
+   
   };
 
   const handleSubmit = async () => {
@@ -36,7 +36,7 @@ export default function UpTeach() {
         mobileNumber,
         role,
         email,
-        batch
+        
       }
     );
     if(res.data.statusCode===200 ||304)
@@ -140,17 +140,7 @@ export default function UpTeach() {
         </FormGroup>
         </div>
         <div className="row">
-        <div className="col"><FormGroup>
-          <Label for="batch">Batch</Label>
-          <Input
-            id="batch"
-            onChange={(e)=>setBatch(e.target.value)}
-            placeholder="Enter batch"
-            type="text"
-            value={batch}
-          
-          />
-        </FormGroup></div>
+       
         </div>
         <Button className="mx-2 mt-2"
           style={{ background: "green", width: "6rem" }} onClick={()=>handleSubmit()}>Submit</Button>

@@ -19,7 +19,7 @@ function CoRegister() {
   let [role,setRole]=useState("")
   let [email,setEmail]=useState("")
   let [password,setPassword]=useState("")
-  let [batch,setBatch]=useState("")
+  
   let [data, setData] = useState([]);
 
   let tableRef = useRef(null);
@@ -52,7 +52,7 @@ function CoRegister() {
 }
 
     const handleSubmit = async ()=>{
-      if (firstName && lastName && mobileNumber && role  && email &&  password && batch)
+      if (firstName && lastName && mobileNumber && role  && email &&  password )
         {let res = await axios.post(`${env.apiurl}/users/signup`,{
           firstName,
           lastName,
@@ -60,7 +60,7 @@ function CoRegister() {
             role,
             email,
             password,
-            batch
+            
         })
         if(res.data.statusCode===200 ||304)
         {
@@ -77,8 +77,7 @@ function CoRegister() {
       setRole("")
       setEmail("")
       setPassword("")
-      setBatch("")
-
+      
  
   };
 
@@ -98,7 +97,7 @@ function CoRegister() {
   useEffect(() => {
     loadCoData();
     
-  }, [data]);
+  }, []);
  
   return (
          <div >
@@ -182,17 +181,6 @@ function CoRegister() {
            
           />
         </FormGroup></div>
-        <div className="col"><FormGroup>
-          <Label for="batch">Batch</Label>
-          <Input
-            id="batch"
-            onChange={(e)=>setBatch(e.target.value)}
-            placeholder="Enter batch Ex. A,B,C"
-            type="text"
-            value={batch}
-          
-          />
-        </FormGroup></div>
         </div>
         <Button className="mx-2 mt-2"
           style={{ background: "green", width: "6rem" }} onClick={()=>handleSubmit()}>Submit</Button>
@@ -214,9 +202,7 @@ function CoRegister() {
               <th>
                 <h5>Email</h5>
               </th>
-              <th>
-                <h5> Batch  </h5>
-              </th>
+            
               <th>
                 <h5>Role </h5>
               </th>
@@ -237,7 +223,7 @@ function CoRegister() {
                   <td>{e.firstName}</td>
                   <td>{e.lastName}</td>
                   <td>{e.email}</td>
-                  <td>{e.batch}</td>
+                
                   <td>{e.role}</td>
                   <td>{e.mobileNumber}</td>
                   <td>
