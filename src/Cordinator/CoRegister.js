@@ -97,7 +97,7 @@ function CoRegister() {
   useEffect(() => {
     loadCoData();
     
-  }, []);
+  }, [data]);
  
   return (
          <div >
