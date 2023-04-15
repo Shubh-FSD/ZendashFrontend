@@ -321,7 +321,7 @@ function StudWebcode() {
           </tbody>
         </Table>
       </div>
-      <h4 style={{color:"red"}}>Taecher Will Assign Task</h4>
+      <h4 style={{color:"red"}}>Teacher Will Assign Task</h4>
     </div> 
   <ToastContainer />
   </div> 
